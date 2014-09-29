@@ -1,0 +1,17 @@
+{
+  "name": "project-euler",
+  "version": "0.0.1",
+  "description": "nt",
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "app-root-path": "^0.1.0",
+    "automocha": "^1.0.0",
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4"
+  }
+}
