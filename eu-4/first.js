@@ -21,7 +21,8 @@ var solution = function(){
 
 
   this.findLargestPalindrome = function(digits){
-    var start = Math.pow(10,digits) - 1;
+    console.time('timer');
+    var start = Math.pow(10,digits) - 1; // start at 9s
     var store = [];
 
     for(var k = start; k > 0; k--){
@@ -33,10 +34,12 @@ var solution = function(){
       }
     }
     
+    // select largest palindrome
     var max = store.reduce(function(a,b){
       if(a > b) return a;
       else return b;
     }); 
+    console.timeEnd('timer');
     return max;
   };
 
