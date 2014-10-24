@@ -11,7 +11,13 @@ touch eu-${number}/first-test.js
 touch eu-${number}/README.md
 
 echo "'use strict';
-/* First attempt at problem ${number} */" > eu-${number}/first.js
+/* First attempt at problem ${number} */
+
+module.exports = function(){
+
+};
+
+" > eu-${number}/first.js
 
 echo "# Problem #${number}
 ===============
