@@ -6,34 +6,23 @@ var rootPath = require('app-root-path');
 
 var Solution = function(){
   this.data = this.parseFile(); 
-  // this.largestAdjacency = this.findMax(); 
+  this.largestAdjacency = this.findLargestProduct(); 
 };
 
-Solution.prototype.findMax = function(){
-  var prev = 0;
+Solution.prototype.findLargestProduct = function(){
+  var largestProduct = 0;
   var current;
   for(var k = 0; k < 20; k++){
     for(var j = 0; j < 20; j++){
-      current = this.getAdjacency(k,j);
-      if(current > prev) prev = current;
+      current = this.getLargestAdjacency(k,j);
+      if(current > largestProduct) 
+        largestProduct = current;
     }
   } 
-  console.log(prev);
-  return prev;
+  return largestProduct;
 };
 
-Solution.prototype.getAdjacency = function(x,y){
-  var adjacencies = [
-    this.getHorizontal(x,y),
-    this.getVertical(x,y),
-    this.getForwardDiagonal(x,y),
-    this.getBackwardDiagonal(x,y)
-  ];
-  return adjacencies.reduce(function(a,b){
-    return a > b ? a : b;
-  });
-};
-
+// return the value of a cell if it is within bounds
 Solution.prototype.getCell = function(x,y){
   if( x < 0 || y < 0 || x > 19 || y > 19 ){
     return 1; // equivalent of no value
@@ -42,70 +31,56 @@ Solution.prototype.getCell = function(x,y){
   }
 };
 
-Solution.prototype.getForwardDiagonal = function(x,y){
+Solution.prototype.getLargestAdjacency = function(x,y){
   var row = x;
   var column = y;
-  var store = [];
-  for(var k = 0; k < 4; k++){
-    store.push(this.getCell(row-k, column+k));
-  }
-  return store.reduce(function(a,b){
-    return a * b;
-  }); 
-};
 
-Solution.prototype.getBackwardDiagonal = function(x,y){
-  var row = x;
-  var column = y;
-  var store = [];
-  for(var k = 0; k < 4; k++){
-    store.push(this.getCell(row-k, column-k));
-  }
-  return store.reduce(function(a,b){
-    return a * b;
-  }); 
-}
+  var horizontal = [];
+  var vertical = [];
+  var forwardDiagonal = [];
+  var backwardDiagonal = [];
 
-Solution.prototype.getHorizontal = function(x,y){
-  var row = x;
-  var column = y;
-  var store = []; 
+  // build array for each adjacency
   for(var k = 0; k < 4; k++){
-    store.push(this.getCell(row, column+k));
+    horizontal.push( this.getCell(row, column+k) );
+    vertical.push( this.getCell(row+k, column) );
+    forwardDiagonal.push( this.getCell(row-k, column+k) );
+    backwardDiagonal.push( this.getCell(row-k, column-k) );
   }
-  return store.reduce(function(a,b){
-    return a * b;
+
+  var adjacencies = [
+    horizontal,
+    vertical,
+    forwardDiagonal,
+    backwardDiagonal
+  ];
+
+  var products = adjacencies.map(function(adjacency){
+    return adjacency.reduce(function(a,b){
+      return a * b;
+    });
   });
 
-};
-
-Solution.prototype.getVertical = function(x,y){
-  var row = x;
-  var column = y;
-  var store = []; 
-  for(var k = 0; k < 4; k++){
-    store.push(this.getCell(row + k, column));
-  }
-  return store.reduce(function(a,b){
-    return a * b;
-  });
-
+  // return the largest product
+  return products.reduce(function(a,b){
+    return a > b ? a : b;
+  }); 
 };
 
 Solution.prototype.parseFile = function(){
   var file = fs.readFileSync(rootPath + '/eu-11/data.txt').toString();
   var arr = file.split(' ');
-  var x = [];
+  var grid = [];
   
   var column = -1;
   for(var k = 0; k < arr.length; k++){
     if(k % 20 === 0){
       column++;
-      x[column] = [];
+      grid[column] = [];
     }
-    x[column].push(parseInt(arr[k]));   
+    grid[column].push(parseInt(arr[k]));   
   };
-  return x;
+  return grid;
 };
 
 module.exports = Solution;
