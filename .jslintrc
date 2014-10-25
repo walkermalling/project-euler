@@ -1,0 +1,10 @@
+{
+  "predef":[
+    "window",
+    "describe",
+    "it",
+    "expect",     
+    "module",
+    "beforeEach"
+  ]
+}
