@@ -30,26 +30,14 @@ describe('First Solution', function(){
     });
   });
 
-  it('can get the horizontal product',function(){
-    expect(solution.getHorizontal(0,0)).to.be.ok;
-    expect(solution.getHorizontal(0,0)).to.eql(34144);
-  });
-
-  it('can get the vertical product',function(){
-    expect(solution.getVertical(0,0)).to.be.ok;
-    expect(solution.getVertical(0,0)).to.eql(1651104);
-  });
-  
-  it('can get the backward diagonal product',function(){
-    expect(solution.getBackwardDiagonal(0,0)).to.be.ok;
-  });
-
-  it('can get the forward diagonal product',function(){
-    expect(solution.getForwardDiagonal(0,0)).to.be.ok;
+  it('can return a cell\'s value',function(){
+    expect(solution.getCell(0,0)).to.eql(8);
+    expect(solution.getCell(-1,-1)).to.eql(1);
   });
 
   it('can get largest adjacency of the grid',function(){
-    expect(solution.findMax()).to.be.ok;
+    expect(solution.findLargestProduct()).to.be.ok;
+    expect(solution.largestProduct).to.eql(70600674)
   });
   
 
