@@ -30,9 +30,14 @@ describe('First Solution', function(){
     });
   });
 
+  it('can return a cell\'s value',function(){
+    expect(solution.getCell(0,0)).to.eql(8);
+    expect(solution.getCell(-1,-1)).to.eql(1);
+  });
+
   it('can get largest adjacency of the grid',function(){
     expect(solution.findLargestProduct()).to.be.ok;
-    expect(solution.largestAdjacency).to.eql(70600674)
+    expect(solution.largestProduct).to.eql(70600674)
   });
   
 

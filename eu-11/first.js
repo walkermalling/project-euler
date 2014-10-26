@@ -1,12 +1,21 @@
 'use strict';
-/* First attempt at problem 11 */
+
+/* 
+ *  First attempt at problem 11 
+ *  
+ *  Ontology:
+ *    The grid of data contains cells,
+ *    Each cell is the origin of four adjacencies:
+ *    horizontal, vertical, forwardDiagonal, backwardDiagonal
+ *     
+ */
 
 var fs = require('fs');
 var rootPath = require('app-root-path');
 
 var Solution = function(){
   this.data = this.parseFile(); 
-  this.largestAdjacency = this.findLargestProduct(); 
+  this.largestProduct = this.findLargestProduct(); 
 };
 
 Solution.prototype.findLargestProduct = function(){
@@ -40,6 +49,8 @@ Solution.prototype.getLargestAdjacency = function(x,y){
   var forwardDiagonal = [];
   var backwardDiagonal = [];
 
+  var adjacencies, products;
+
   // build array for each adjacency
   for(var k = 0; k < 4; k++){
     horizontal.push( this.getCell(row, column+k) );
@@ -48,37 +59,39 @@ Solution.prototype.getLargestAdjacency = function(x,y){
     backwardDiagonal.push( this.getCell(row-k, column-k) );
   }
 
-  var adjacencies = [
+  // map adjacencies
+  adjacencies = [
     horizontal,
     vertical,
     forwardDiagonal,
     backwardDiagonal
   ];
 
-  var products = adjacencies.map(function(adjacency){
+  // map products
+  products = adjacencies.map(function(adjacency){
     return adjacency.reduce(function(a,b){
       return a * b;
     });
   });
 
-  // return the largest product
+  // reduce to largest product
   return products.reduce(function(a,b){
     return a > b ? a : b;
   }); 
 };
 
 Solution.prototype.parseFile = function(){
-  var file = fs.readFileSync(rootPath + '/eu-11/data.txt').toString();
-  var arr = file.split(' ');
   var grid = [];
-  
+  var data = fs.readFileSync(rootPath + '/eu-11/data.txt')
+              .toString().split(' ');
+
   var column = -1;
-  for(var k = 0; k < arr.length; k++){
+  for(var k = 0; k < data.length; k++){
     if(k % 20 === 0){
       column++;
       grid[column] = [];
     }
-    grid[column].push(parseInt(arr[k]));   
+    grid[column].push(parseInt(data[k]));   
   };
   return grid;
 };
