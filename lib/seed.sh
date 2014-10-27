@@ -53,6 +53,7 @@ describe('First Solution', function(){
 
 echo "linking test file into automocha..."
 
+mkdir -p test/automocha
 rm test/automocha/first-test.js
 ln eu-${number}/first-test.js test/automocha/
 
