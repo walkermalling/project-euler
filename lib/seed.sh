@@ -2,7 +2,9 @@
 clear
 echo "Enter problem number:"
 read number
-echo "Problem Description:"
+echo "Problem Title:"
+read title
+echo "Description:"
 read description
 echo "Creating new directory and files..."
 mkdir eu-${number}
@@ -19,7 +21,7 @@ module.exports = function(){
 
 " > eu-${number}/first.js
 
-echo "# Problem #${number}
+echo "# ${number}. ${title}
 ===============
 
 ${description}
@@ -27,7 +29,10 @@ ${description}
 
 echo "'use strict';
 
-/* Tests for problem ${number} */
+/** 
+ *  Tests for problem ${number}: ${title}
+ *  Description: ${description}
+ */
 
 var expect = require('chai').expect;
 var rootPath = require('app-root-path');
