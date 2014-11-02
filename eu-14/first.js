@@ -9,34 +9,55 @@
 
 var Solution = function(){
 
-  this.Hailstone = function(n){
-    this.seed = n;
-    this.sequence = [];
-    this.length = 0;
-    while(n > 1){
-      this.sequence.push(n);
-      if(n % 2 === 0) n = n/2;
-      else n = 3 * n + 1;
+  var memo = [];
+  var repeats = 0;
+
+  function hailstone(x){
+    var count = 0;
+    var n = x;
+
+    if(memo[n]){
+      repeats++;
+      return memo[n];
     }
-    this.length = this.sequence.length;
+
+    while(n > 1){
+      if(memo[n]){
+        count += memo[n];
+        break;
+      } else {
+        count++;
+        if( (x & (x - 1)) === 0 ){
+          count += Math.log(x) / Math.log(2);
+          n = 1;
+        } else if (n % 2 === 0) {
+          n = n/2;
+        } else {
+          n = 3 * n + 1;
+        }
+      }
+    }
+
+    memo[x] = count;
+    return count;
+    
   };
 
   this.solve = function(n){
+    console.log('\nSolving for ' + n);
     var time = Date.now();
     var max = n || 1000000
-      , longest = new this.Hailstone(1)
+      , longest = hailstone(1)
       , temp;
 
     for(var x = 2; x < max; x++){
-      if( (x & (x - 1)) === 0 ){
-        temp = Math.log(x) / Math.log(2); 
-      }
-      else{
-        temp = new this.Hailstone(x);
-      }
-      if( temp.length > longest.length ) longest = temp;
+      temp = hailstone(x);
+      if(temp > longest) longest = temp;
     }
-    console.dir( Date.now() - time + 'ms');
+
+    console.log( Date.now() - time + 'ms');
+    console.log('Longest: ' + longest);
+    console.log('Repeats: ' + repeats);
     return longest;
   };
 

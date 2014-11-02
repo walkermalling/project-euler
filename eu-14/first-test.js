@@ -16,18 +16,12 @@ describe('First Solution', function(){
     expect(solution).to.be.ok;
   });
 
-  it('can create a new hailstone sequence', function(){
-    var hailstone = new solution.Hailstone(20);
-    expect(hailstone).to.be.ok;
-    expect(hailstone.seed).to.eql(20);
-    expect(hailstone.length).to.eql(7);
-    expect(hailstone.sequence).to.eql([20,10,5,16,8,4,2]);
-  });
-
   it('can find the longest hailstone sequence', function(){
-    var s = solution.solve(20);
-    expect(s.seed).to.eql(18);
+    var a = solution.solve(20);
+    var s = solution.solve(1000);
     var t = solution.solve(100000);
+    var m = solution.solve(1000000);
+    expect(m).to.eql(525);
   });
 
 });
