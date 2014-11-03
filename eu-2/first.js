@@ -7,17 +7,21 @@
  */
 
 module.exports = function(max){
-  var queue = [1,1];
-  var count = 1;
-  var eventsTotal = 0;
+  var queue = [1,1]
+    , count = 1
+    , evensTotal = 0;
 
   while(queue[0] < max){
+
     count ++;
     queue.push( queue.shift() + queue[0] );
-    if (count === 2){ // 
+
+    if (count === 2){ 
       count = -1;
-      eventsTotal += queue[1];
+      evensTotal += queue[1];
     }
+
   }
-  return eventsTotal;
+
+  return evensTotal;
 };
