@@ -10,32 +10,30 @@
 var Solution = function(){
 
   var memo = [];
-  var repeats = 0;
+  var reminded = 0;
 
   function hailstone(x){
     var count = 0;
     var n = x;
 
-    if(memo[n]){
-      repeats++;
-      return memo[n];
-    }
-
+    if(memo[n]) return memo[n];
+    
     while(n > 1){
+
       if(memo[n]){
         count += memo[n];
+        reminded++;
+        break;
+      }
+      
+      if( isPowerOfTwo(n) ){
+        count += Math.log(n) / Math.log(2);
         break;
       } else {
         count++;
-        if( (x & (x - 1)) === 0 ){
-          count += Math.log(x) / Math.log(2);
-          n = 1;
-        } else if (n % 2 === 0) {
-          n = n/2;
-        } else {
-          n = 3 * n + 1;
-        }
+        n = applyCollatzRulesTo(n);
       }
+      
     }
 
     memo[x] = count;
@@ -43,9 +41,23 @@ var Solution = function(){
     
   };
 
+  function applyCollatzRulesTo(n){
+    if (n % 2 === 0) return n/2;
+    else return 3 * n + 1;
+  }
+
+  function isPowerOfTwo(n){
+    // bitwise check
+    return (n & (n - 1)) === 0;
+  }
+
+
   this.solve = function(n){
+
     console.log('\nSolving for ' + n);
+
     var time = Date.now();
+
     var max = n || 1000000
       , longest = hailstone(1)
       , temp;
@@ -55,9 +67,11 @@ var Solution = function(){
       if(temp > longest) longest = temp;
     }
 
+    // report
     console.log( Date.now() - time + 'ms');
     console.log('Longest: ' + longest);
-    console.log('Repeats: ' + repeats);
+    console.log('Calls: ' + reminded);
+
     return longest;
   };
 

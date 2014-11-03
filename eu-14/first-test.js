@@ -17,11 +17,8 @@ describe('First Solution', function(){
   });
 
   it('can find the longest hailstone sequence', function(){
-    var a = solution.solve(20);
-    var s = solution.solve(1000);
-    var t = solution.solve(100000);
     var m = solution.solve(1000000);
-    expect(m).to.eql(525);
+    expect(m).to.eql(524);
   });
 
 });
