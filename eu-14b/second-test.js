@@ -17,15 +17,14 @@ var data1 = [
 
 describe('Pyramid', function(){
 
-  var s;
+  var s = new Solution(data1);
+  
 
-  beforeEach(function(){
-    s = new Solution(data1);
-  });
 
-  it('instantiates a Pyramid',function(){
-    expect(s).to.be.ok;
-    expect(s).to.be.an.instanceOf(Solution);
+
+  it('can find a node', function(){
+    var someNode = s.findNode(s.apex, {x:1,y:1});
+    expect(someNode.value).to.eql('29');
   });
 
 
