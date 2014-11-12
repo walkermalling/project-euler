@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ *  For a given natural number
+ *   return its greatest prime factor
+ */
+
  module.exports = function(num){
 
   var factors = []
