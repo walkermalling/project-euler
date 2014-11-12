@@ -7,10 +7,11 @@ read title
 echo "Description:"
 read description
 echo "Creating new directory and files..."
-mkdir eu-${number}
-touch eu-${number}/first.js
-touch eu-${number}/first-test.js
-touch eu-${number}/README.md
+newdir="${number}-${title// /_}"
+mkdir "${newdir}"
+touch "${newdir}"/first.js
+touch "${newdir}"/first-test.js
+touch "${newdir}"/README.md
 
 echo "'use strict';
 /* First attempt at problem ${number} */
@@ -19,13 +20,12 @@ module.exports = function(){
 
 };
 
-" > eu-${number}/first.js
+" > "${newdir}"/first.js
 
 echo "# ${number}. ${title}
-===============
 
 ${description}
-" > eu-${number}/README.md
+" > "${newdir}"/README.md
 
 echo "'use strict';
 
@@ -54,15 +54,15 @@ describe('First Solution', function(){
 
 });
 
-" > eu-${number}/first-test.js
+" > "${newdir}"/first-test.js
 
 echo "linking test file into automocha..."
 
 mkdir -p test/automocha
 rm test/automocha/*-test.js
-ln eu-${number}/first-test.js test/automocha/
+ln "${newdir}"/first-test.js test/automocha/
 
 echo "done"
 echo "listing new contents:"
 
-ls eu-${number}
+ls "${newdir}"

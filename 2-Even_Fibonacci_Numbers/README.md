@@ -1,5 +1,4 @@
 # 2. Even Fibonacci Numbers
-==============
 
 For a Fibonacci sequence that does not exceed four million, find the sum of the even-valued terms.
 
