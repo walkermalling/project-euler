@@ -36,7 +36,7 @@ echo "'use strict';
 
 var expect = require('chai').expect;
 var rootPath = require('app-root-path');
-var Solution = require(rootPath + '/eu-${number}/first');
+var Solution = require(rootPath + '/${newdir}/first');
 
 describe('First Solution', function(){
 
