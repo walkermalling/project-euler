@@ -16,7 +16,7 @@ touch "${newdir}"/README.md
 echo "'use strict';
 /* First attempt at problem ${number} */
 
-module.exports = function(){
+module.exports = function () {
 
 };
 
@@ -38,15 +38,15 @@ var expect = require('chai').expect;
 var rootPath = require('app-root-path');
 var Solution = require(rootPath + '/${newdir}/first');
 
-describe('First Solution', function(){
+describe('First Solution', function () {
 
   var solution;
 
-  beforeEach(function(){
+  beforeEach(function () {
     solution = new Solution();
   });
 
-  it('to be ok', function(){
+  it('to be ok', function () {
     expect(solution).to.be.ok;
   });
 
