@@ -21,7 +21,20 @@ describe('First Solution', function(){
     expect(solution).to.be.ok;
   });
 
-  it('...');
+  it('can read and convert data from file', function () {
+    var data = solution.fetchTriangle('/18-Maximum_Path_Sum_1/triangle-data');
+    expect(data).to.be.an('Array');
+    for (var r = 0; r < data.length; r++) {
+      for (var c = 0; c < data[r].length; c++) {
+        expect(data[r][c]).to.be.a('Number');
+      }
+    }
+  });
+
+  it('can find maximum sum', function () {
+    var custom = new Solution('/18-Maximum_Path_Sum_1/triangle-data');
+    expect(custom.memo[0][0]).to.eql(1074);
+  });
 
 });
 
