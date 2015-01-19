@@ -31,7 +31,6 @@ describe('First Solution', function () {
       'month' : 2,
       'day' : 2
     });
-    console.log(solution.prettyDay(day));
   });
 
   it('calculates year 2000 as leap year', function () {
@@ -40,12 +39,43 @@ describe('First Solution', function () {
       'month': 3,
       'day': 1
     });
-    console.log(result);
   });
 
   it('can count 1st Sundays', function () {
-    solution.countSundays();
+    var firstSundays = solution.countSundays();
+    expect(firstSundays).to.eql(171);
   })
+
+  // check solution's calendar against native date obj
+  it('gets every day right', function () {
+    var discrepancyCount = 0;
+    var daysInMonth = [0,31,28,31,30,31,30,31,31,30,31,30,31];
+    
+    for (var year = 1900; year <= 2000; year++) {
+      for (var month = 1; month <= 12; month++) {
+        for (var day = 1; day <= daysInMonth[month]; day++) {
+
+          var date = {'year': year,'month': month,'day': day};
+          var weekday = solution.dayOfWeek(date);
+          var control = new Date(year, month - 1, day);
+          if (weekday !== control.getDay() - 1) {
+            if (weekday === 6 && control.getDay() === 0) {
+              // fair
+            } else {
+              discrepancyCount++;
+              console.log('-------------------------');
+              console.log(date);  
+              console.log(solution.prettyDay(weekday) + ' ('+weekday+')');
+              console.log(control + '(' + control.getDay() + ')');
+              return;
+            }
+          }
+        }
+      }
+    }
+    // console.log('\tTotal Discrepancies: ' + discrepancyCount);
+    expect(discrepancyCount).to.eql(0);
+  });
 
 });
 

@@ -55,7 +55,7 @@ Calendar.prototype.dayOfWeek = function (date) {
   var monthTotal = (function () {
 
     // assume month is 1 index, not 0 index;
-    var daysInMonth = [0,31,28,31,30,31,30,31,31,30,31,31,31];
+    var daysInMonth = [0,31,28,31,30,31,30,31,31,30,31,30,31];
     var sum = 0;
     var month = 1;
 
@@ -65,11 +65,11 @@ Calendar.prototype.dayOfWeek = function (date) {
     }
 
     // correct for leap year
-    if (date.year % 4 === 0) {
-      if (date.year % 100 === 0 && date.year % 400 === 0) {
-        if (date.month > 2 || (date.month === 2 && date.day === 29)) {
-          sum++;
-        }
+    if (date.month > 2) {
+      if (date.year % 4 === 0 && date.year % 100 !== 0) {
+        sum++;
+      } else if (date.year % 100 === 0 && date.year % 400 === 0) {
+        sum++;
       }
     }
     return sum;
@@ -103,13 +103,10 @@ Calendar.prototype.countSundays = function () {
         'day': 1
       });
       if (dayOfFirst === 6) {
-        console.log('Count ' + year + ', ' + month + ' 1st a Sunday');
         firstOfMonthSundays++;
       }
     }
   }
-
-  console.log(firstOfMonthSundays);
 
   return firstOfMonthSundays;
 
