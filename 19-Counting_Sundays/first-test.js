@@ -2,7 +2,9 @@
 
 /** 
  *  Tests for problem 19: Counting Sundays
- *  Description: How many Sundays fell on the first of the month during the twentieth century (Jan 1st, 1901 to Dec 31st 2000)?
+ *  
+ *  Description: How many Sundays fell on the first of the month during the 
+ *  twentieth century (Jan 1st, 1901 to Dec 31st 2000)?
  */
 
 var expect = require('chai').expect;
@@ -39,6 +41,7 @@ describe('First Solution', function () {
       'month': 3,
       'day': 1
     });
+    expect(result).to.eql(2); // Wednesday
   });
 
   it('can count 1st Sundays', function () {

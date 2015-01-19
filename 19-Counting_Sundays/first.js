@@ -80,9 +80,16 @@ Calendar.prototype.dayOfWeek = function (date) {
   return daysElapsed % 7;
 
 }
-
+/**
+ * Given an integer representing a day of the week, return the name of that
+ * day as a String
+ *
+ * Note: for siplicity solving the given 1st Sunday problem, Monday is 0 rather
+ * than sunday.  If this calendar module is ever repurposed for use elsewhere, 
+ * this should probobaly be changed to conform with the standard Sunday = 0.
+ * The JavaScript Date object used Sunday as 0 index.
+ */
 Calendar.prototype.prettyDay = function (num) {
-  // count 
   var days = [
     'Monday','Tuesday','Wednesday','Thursday',
     'Friday','Saturday','Sunday'
