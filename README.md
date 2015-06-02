@@ -20,5 +20,5 @@ I've included the shell script `/lib/seed.sh` I use to generate new template fil
 
 ### C
 
-While most of my solutions are written in JavaScript I have recently started to add solutions in C as well.
+While most of my solutions are written in JavaScript I have recently started to add solutions in C as well..
 

@@ -4,7 +4,7 @@
 
 var expect = require('chai').expect;
 var rootPath = require('app-root-path');
-var Solution = require(rootPath + '/eu-11/first');
+var Solution = require('./first');
 
 describe('First Solution', function(){
 

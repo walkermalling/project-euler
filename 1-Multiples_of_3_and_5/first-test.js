@@ -2,7 +2,7 @@
  /*jshint node:true*/
 var expect = require('chai').expect;
 var rootPath = require('app-root-path');
-var solution = require(rootPath + '/eu-1/first');
+var solution = require('./first');
 
 describe('First Solution', function(){
 

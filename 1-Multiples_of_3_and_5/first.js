@@ -4,8 +4,8 @@
 
 module.exports = function(limit){
 
-  var multiples = []
-  , sum = 0;
+  var multiples = [];
+  var sum = 0;
 
   function retain(num){
     if(multiples.indexOf(num) === -1) multiples.push(num);
